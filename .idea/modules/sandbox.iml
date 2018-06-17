@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module external.linked.project.id="sandbox" external.linked.project.path="$MODULE_DIR$/../../sandbox" external.root.project.path="$MODULE_DIR$/../../sandbox" external.system.id="GRADLE" external.system.module.group="" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="true">
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/../../sandbox/out/production/classes" />
+    <output-test url="file://$MODULE_DIR$/../../sandbox/out/test/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../sandbox">
+      <sourceFolder url="file://$MODULE_DIR$/../../sandbox/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../sandbox/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../sandbox/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../sandbox/src/test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/../../sandbox/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../sandbox/build" />
       <excludeFolder url="file://$MODULE_DIR$/../../sandbox/out" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Gradle: org.testng:testng:6.14.3" level="project" />
+    <orderEntry type="library" name="Gradle: com.beust:jcommander:1.72" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache-extras.beanshell:bsh:2.0b6" level="project" />
   </component>
 </module>
