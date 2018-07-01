@@ -11,51 +11,51 @@ import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
 
-  WebDriver wd;
+   WebDriver wd;
 
-  private ContactHelper contactHelper;
-  private SessionHelper sessionHelper;
-  private NavigationHelper navigationHelper;
-  private GroupHelper groupHelper;
-  private String browser;
+   private ContactHelper contactHelper;
+   private SessionHelper sessionHelper;
+   private NavigationHelper navigationHelper;
+   private GroupHelper groupHelper;
+   private String browser;
 
-  public ApplicationManager(String browser) {
-    this.browser = browser;
-  }
-
-
-  public void init() {
-    if (browser.equals(BrowserType.FIREFOX)) {
-      wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
-
-    } else if (browser.equals(BrowserType.CHROME)) {
-      wd = new ChromeDriver();
-    } else if (browser.equals(BrowserType.IE)) {
-      wd = new InternetExplorerDriver();
-    }
-    wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-    wd.get("http://localhost/addressbook/index.php");
-    contactHelper = new ContactHelper(wd);
-    groupHelper = new GroupHelper(wd);
-    navigationHelper = new NavigationHelper(wd);
-    sessionHelper = new SessionHelper(wd);
-    sessionHelper.login("admin", "secret");
-  }
+   public ApplicationManager(String browser) {
+      this.browser = browser;
+   }
 
 
-  public void stop() {
-    wd.quit();
-  }
+   public void init() {
+      if (browser.equals(BrowserType.FIREFOX)) {
+         wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
 
-  public GroupHelper getGroupHelper() {
-    return groupHelper;
-  }
+      } else if (browser.equals(BrowserType.CHROME)) {
+         wd = new ChromeDriver();
+      } else if (browser.equals(BrowserType.IE)) {
+         wd = new InternetExplorerDriver();
+      }
+      wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+      wd.get("http://localhost/addressbook/index.php");
+      contactHelper = new ContactHelper(wd);
+      groupHelper = new GroupHelper(wd);
+      navigationHelper = new NavigationHelper(wd);
+      sessionHelper = new SessionHelper(wd);
+      sessionHelper.login("admin", "secret");
+   }
 
-  public NavigationHelper getNavigationHelper() {
-    return navigationHelper;
-  }
 
-  public ContactHelper getContactHelper() {
-    return contactHelper;
-  }
+   public void stop() {
+      wd.quit();
+   }
+
+   public GroupHelper getGroupHelper() {
+      return groupHelper;
+   }
+
+   public NavigationHelper getNavigationHelper() {
+      return navigationHelper;
+   }
+
+   public ContactHelper getContactHelper() {
+      return contactHelper;
+   }
 }

@@ -4,7 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
 
 public class GroupModificationTests extends TestBase {
 
