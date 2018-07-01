@@ -1,5 +1,7 @@
 package ru.stqa.pft.addressbook.model;
 
+import java.util.Objects;
+
 public class ContactData {
    private final String firstname;
    private final String secondname;
@@ -45,5 +47,28 @@ public class ContactData {
 
    public String getGroup() {
       return group;
+   }
+
+   @Override
+   public String toString() {
+      return "ContactData{" +
+              "firstname='" + firstname + '\'' +
+              ", secondname='" + secondname + '\'' +
+              '}';
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o) return true;
+      if (o == null || getClass() != o.getClass()) return false;
+      ContactData that = (ContactData) o;
+      return Objects.equals(firstname, that.firstname) &&
+              Objects.equals(secondname, that.secondname);
+   }
+
+   @Override
+   public int hashCode() {
+
+      return Objects.hash(firstname, secondname);
    }
 }
