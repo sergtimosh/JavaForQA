@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class ContactData {
 
-   private final String id;
+   private int id;
    private final String firstname;
    private final String secondname;
    private final String address;
@@ -14,7 +14,7 @@ public class ContactData {
    private String group;
 
    public ContactData(String firstname, String secondName, String address, String email, String phone1, String phone2, String group) {
-      this.id = null;
+      this.id = 0;
       this.firstname = firstname;
       this.secondname = secondName;
       this.address = address;
@@ -23,7 +23,7 @@ public class ContactData {
       this.phone2 = phone2;
       this.group = group;
    }
-   public ContactData(String id, String firstname, String secondname, String address, String email, String phone1, String phone2, String group) {
+   public ContactData(int id, String firstname, String secondname, String address, String email, String phone1, String phone2, String group) {
       this.id = id;
       this.firstname = firstname;
       this.secondname = secondname;
@@ -34,7 +34,7 @@ public class ContactData {
       this.group = group;
    }
 
-   public String getId() {
+   public int getId() {
       return id;
    }
 
@@ -64,6 +64,10 @@ public class ContactData {
 
    public String getGroup() {
       return group;
+   }
+
+   public void setId(int id) {
+      this.id = id;
    }
 
    @Override
