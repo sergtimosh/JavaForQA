@@ -14,7 +14,12 @@ public class ContactModificationTests extends TestBase {
    public void ensurePreconditions() {
       app.goTo().HomePage();
       if (app.contact().list().size() == 0) {
-         app.contact().create(new ContactData("Serhiy", "Tymoshenko", "17. Sichovy str.\n116 apt", "serdtimosh@gmail.com", "+0472313950", "+380945643839", "test1"), true);
+         app.contact().create(new ContactData()
+                 .withFirstName("Serhiy").withSecondName("Tymoshenko")
+                 .withAddress("17. Sichovy str.\n116 apt")
+                 .withEmail("serdtimosh@gmail.com")
+                 .withPhone1("+0472313950").withPhone2("+380945643839")
+                 .withGroup("test1"), true);
       }
    }
 
@@ -22,7 +27,15 @@ public class ContactModificationTests extends TestBase {
    public void testContactModification() {
       List<ContactData> before = app.contact().list();
       int index = before.size() - 1;
-      ContactData contact = new ContactData(before.get(index).getId(), "Vasyl", "Kosyi", "17. Sichovy str.\n118 apt", "serdtimosh@gmail.com", "+0472313945", "+380945643856", null);
+      ContactData contact = new ContactData()
+              .withId(before.get(index).getId())
+              .withFirstName("Vasyl")
+              .withSecondName("Kosyi")
+              .withAddress("17. Sichovy str.\n118 apt")
+              .withEmail("serdtimosh@gmail.com")
+              .withPhone1("+0472313945")
+              .withPhone2("+380945643856")
+              .withGroup(null);
       app.contact().modify(index, contact);
       List<ContactData> after = app.contact().list();
       Assert.assertEquals(after.size(), before.size());
