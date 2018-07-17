@@ -7,12 +7,13 @@ public class ContactData {
    private int id = Integer.MAX_VALUE;
    private String firstName;
    private String secondName;
+
    private String address;
+
    private String email;
    private String phone1;
    private String phone2;
    private String group;
-
 
    public int getId() {
       return id;
@@ -100,13 +101,14 @@ public class ContactData {
       if (this == o) return true;
       if (o == null || getClass() != o.getClass()) return false;
       ContactData that = (ContactData) o;
-      return Objects.equals(firstName, that.firstName) &&
+      return id == that.id &&
+              Objects.equals(firstName, that.firstName) &&
               Objects.equals(secondName, that.secondName);
    }
 
    @Override
    public int hashCode() {
 
-      return Objects.hash(firstName, secondName);
+      return Objects.hash(id, firstName, secondName);
    }
 }
