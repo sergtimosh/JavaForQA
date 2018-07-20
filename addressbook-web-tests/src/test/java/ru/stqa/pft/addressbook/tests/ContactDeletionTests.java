@@ -15,10 +15,10 @@ public class ContactDeletionTests extends TestBase {
       app.goTo().HomePage();
       if (app.contact().all().size() == 0) {
          app.contact().create(new ContactData()
-                 .withFirstName("Serhiy").withSecondName("Tymoshenko")
+                 .withFirstName("Serhiy").withLastName("Tymoshenko")
                  .withAddress("17. Sichovy str.\n116 apt")
-                 .withEmail("serdtimosh@gmail.com")
-                 .withPhone1("+0472313950").withPhone2("+380945643839")
+                 .withAllEmails("serdtimosh@gmail.com")
+                 .withHomePhone("+0472313950").withMobilePhone("+380945643839").withWorkPhone("+380975643850")
                  .withGroup("test1"), true);
       }
    }

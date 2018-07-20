@@ -14,12 +14,10 @@ public class ContactCreationTests extends TestBase {
       app.goTo().HomePage();
       Contacts before = app.contact().all();
       ContactData contact = new ContactData()
-              .withFirstName("Arsen")
-              .withSecondName("Tymoshenko")
+              .withFirstName("Arsen").withLastName("Tymoshenko")
               .withAddress("17. Sichovy str.\n116 apt")
-              .withEmail("serdtimosh@gmail.com")
-              .withPhone1("+0472313950")
-              .withPhone2("+380945643839")
+              .withEmail("serdtimosh@gmail.com").withEmail2("serdtimosh+1@gmail.com").withEmail3("serdtimosh+2@gmail.com")
+              .withHomePhone("+0472313950").withMobilePhone("+380945643839").withWorkPhone("+380975643850")
               .withGroup("test1");
       app.contact().create(contact, true);
       Contacts after = app.contact().all();
