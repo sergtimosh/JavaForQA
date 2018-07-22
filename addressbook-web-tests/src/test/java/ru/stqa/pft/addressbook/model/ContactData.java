@@ -9,14 +9,14 @@ public class ContactData {
    private String firstName;
    private String lastName;
    private String address;
-   private String email;
-   private String email2;
-   private String email3;
-   private String allEmails;
    private String homePhone;
    private String mobilePhone;
    private String workPhone;
    private String allPhones;
+   private String email;
+   private String email2;
+   private String email3;
+   private String allEmails;
    private String group;
    private File photo;
 
