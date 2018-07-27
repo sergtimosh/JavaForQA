@@ -195,7 +195,7 @@ public class ContactData {
    @Override
    public boolean equals(Object o) {
       if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
+      if (!(o instanceof ContactData)) return false;
       ContactData that = (ContactData) o;
       return id == that.id &&
               Objects.equals(firstName, that.firstName) &&
@@ -207,21 +207,28 @@ public class ContactData {
               Objects.equals(email, that.email) &&
               Objects.equals(email2, that.email2) &&
               Objects.equals(email3, that.email3);
-//              && Objects.equals(group, that.group);
    }
 
    @Override
    public int hashCode() {
 
-      return Objects.hash(id, firstName, lastName, address, homePhone, mobilePhone, workPhone, email, email2, email3, group);
+      return Objects.hash(id, firstName, lastName, address, homePhone, mobilePhone, workPhone, email, email2, email3);
    }
 
    @Override
    public String toString() {
       return "ContactData{" +
-              "id='" + id + '\'' +
+              "id=" + id +
               ", firstName='" + firstName + '\'' +
-              ", secondName='" + lastName + '\'' +
+              ", lastName='" + lastName + '\'' +
+              ", address='" + address + '\'' +
+              ", homePhone='" + homePhone + '\'' +
+              ", mobilePhone='" + mobilePhone + '\'' +
+              ", workPhone='" + workPhone + '\'' +
+              ", email='" + email + '\'' +
+              ", email2='" + email2 + '\'' +
+              ", email3='" + email3 + '\'' +
+              ", group='" + group + '\'' +
               '}';
    }
 

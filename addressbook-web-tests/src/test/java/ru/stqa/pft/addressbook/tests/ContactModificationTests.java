@@ -33,7 +33,7 @@ public class ContactModificationTests extends TestBase {
               .withId(modifiedContact.getId())
               .withFirstName("John")
               .withLastName("Doe")
-              .withAddress("17. Sichovy str.\n118 apt")
+              .withAddress("17. Sichovy str.\r\n218 apt")
               .withEmail("waskos@gmail.com").withEmail2("waskos+1@gmail.com").withEmail3("waskos+2@gmail.com")
               .withHomePhone("+0472313945").withMobilePhone("+380945643856").withWorkPhone("+380955653950")
               .withGroup(null)

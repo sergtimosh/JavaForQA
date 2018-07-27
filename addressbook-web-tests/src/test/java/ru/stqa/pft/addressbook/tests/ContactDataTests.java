@@ -12,6 +12,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactDataTests extends TestBase {
 
+   public static String cleaned(String contactData) {
+      return contactData.replaceAll("\\s", "").replaceAll("[-()]]", "");
+   }
+
    @BeforeMethod
    public void ensurePreconditions() {
       app.goTo().HomePage();
@@ -57,7 +61,6 @@ public class ContactDataTests extends TestBase {
       assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
    }
 
-
    private String mergePhones(ContactData contact) {
       return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
               .stream().filter((s) -> !s.equals(""))
@@ -70,9 +73,5 @@ public class ContactDataTests extends TestBase {
               .stream().filter((s) -> !s.equals(""))
               .map(ContactDataTests::cleaned)
               .collect(Collectors.joining("\n"));
-   }
-
-   public static String cleaned(String contactData) {
-      return contactData.replaceAll("\\s", "").replaceAll("[-()]]", "");
    }
 }

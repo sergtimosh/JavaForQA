@@ -2,37 +2,40 @@
   {
     "firstName": "Serhiy 0",
     "lastName": "Tymoshenko 0",
-    "address": "10. Sichovy str.\n110 apt 0",
-    "email": "serdtimosh0@gmail.com",
-    "email2": "serdtimosh10@gmail.com",
-    "email3": "serdtimosh30@gmail.com",
+    "address": "10. Sichovy str.\r\n110 apt 0",
     "homePhone": "+0472313950",
     "mobilePhone": "+0472313950",
     "workPhone": "+0472313950",
-    "group": "test 0"
+    "email": "serdtimosh0@gmail.com",
+    "email2": "serdtimosh10@gmail.com",
+    "email3": "serdtimosh30@gmail.com",
+    "group": "test 0",
+    "photo": "src/test/resources/duck.png"
   },
   {
     "firstName": "Serhiy 1",
     "lastName": "Tymoshenko 1",
-    "address": "11. Sichovy str.\n111 apt 1",
-    "email": "serdtimosh1@gmail.com",
-    "email2": "serdtimosh11@gmail.com",
-    "email3": "serdtimosh31@gmail.com",
+    "address": "11. Sichovy str.\r\n111 apt 1",
     "homePhone": "+0472313951",
     "mobilePhone": "+0472313951",
     "workPhone": "+0472313951",
-    "group": "test 1"
+    "email": "serdtimosh1@gmail.com",
+    "email2": "serdtimosh11@gmail.com",
+    "email3": "serdtimosh31@gmail.com",
+    "group": "test 1",
+    "photo": "src/test/resources/duck.png"
   },
   {
     "firstName": "Serhiy 2",
     "lastName": "Tymoshenko 2",
-    "address": "12. Sichovy str.\n112 apt 2",
-    "email": "serdtimosh2@gmail.com",
-    "email2": "serdtimosh12@gmail.com",
-    "email3": "serdtimosh32@gmail.com",
+    "address": "12. Sichovy str.\r\n112 apt 2",
     "homePhone": "+0472313952",
     "mobilePhone": "+0472313952",
     "workPhone": "+0472313952",
-    "group": "test 2"
+    "email": "serdtimosh2@gmail.com",
+    "email2": "serdtimosh12@gmail.com",
+    "email3": "serdtimosh32@gmail.com",
+    "group": "test 2",
+    "photo": "src/test/resources/duck.png"
   }
 ]
