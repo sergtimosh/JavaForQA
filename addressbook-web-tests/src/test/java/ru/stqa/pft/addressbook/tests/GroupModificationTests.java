@@ -29,5 +29,7 @@ public class GroupModificationTests extends TestBase {
       assertThat(app.group().count(), equalTo(before.size())); //assertion is needed, to have some control over ui side despite it is slows down test execution
       Groups after = app.db().groups();
       assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group)));
+      verifyGroupListInUi();
    }
+
 }
