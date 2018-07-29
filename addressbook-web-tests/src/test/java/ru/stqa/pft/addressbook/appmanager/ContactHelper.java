@@ -22,7 +22,7 @@ public class ContactHelper extends HelperBase {
 
    public void fillContactForm(ContactData contactData, boolean creation) {
       type(By.name("firstname"), contactData.getFirstName());
-      type(By.name("lastname"), contactData.getSecondName());
+      type(By.name("lastname"), contactData.getLastName());
       attach(By.name("photo"), contactData.getPhoto());
       type(By.name("address"), contactData.getAddress());
       type(By.name("email"), contactData.getEmail());
@@ -33,7 +33,10 @@ public class ContactHelper extends HelperBase {
       type(By.name("work"), contactData.getWorkPhone());
 
       if (creation) {
-         new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+         if (contactData.getGroups().size() > 0) {
+            Assert.assertTrue(contactData.getGroups().size() == 1);
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+         }
       } else {
          Assert.assertFalse(isElementPresent(By.name("new_group")));
       }
@@ -113,8 +116,7 @@ public class ContactHelper extends HelperBase {
                  .withFirstName(name).withLastName(lastName)
                  .withAddress(address)
                  .withAllEmails(allEmails)
-                 .withAllPhones(allPhones)
-                 .withGroup(null);
+                 .withAllPhones(allPhones);
          contacts.add(contact);
       }
       return contacts;
