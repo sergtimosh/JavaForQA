@@ -13,6 +13,7 @@ public class GroupDeletionTests extends TestBase {
    @BeforeMethod
    public void ensurePreconditions() {
       ensureGroupPresent();
+      app.goTo().groupPage();
    }
 
    @Test()

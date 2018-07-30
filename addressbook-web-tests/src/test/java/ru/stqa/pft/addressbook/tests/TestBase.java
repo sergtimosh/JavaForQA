@@ -73,7 +73,7 @@ public class TestBase {
    public void ensureGroupPresent() {
       if (app.db().groups().size() == 0) {
          app.goTo().groupPage();
-         GroupData newGroup = new GroupData().withName("test 1").withHeader("test 2").withFooter("test 3");
+         GroupData newGroup = new GroupData().withName("test 1");
          app.group().create(newGroup);
       }
    }

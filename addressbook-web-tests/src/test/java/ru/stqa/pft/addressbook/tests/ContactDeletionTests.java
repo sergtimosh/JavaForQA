@@ -12,9 +12,9 @@ public class ContactDeletionTests extends TestBase {
 
    @BeforeMethod
    public void ensurePreconditions() {
-      app.goTo().HomePage();
       ensureGroupPresent();
       ensureContactPresent();
+      app.goTo().HomePage();
    }
 
    @Test

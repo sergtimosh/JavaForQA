@@ -34,6 +34,7 @@ public class ContactDataTests extends TestBase {
                  .withHomePhone("+0472313950").withMobilePhone("+380945643839").withWorkPhone("+380975643850")
                  .inGroup(groups.iterator().next()), true);
       }
+      app.goTo().HomePage();
    }
 
    /**
@@ -43,7 +44,6 @@ public class ContactDataTests extends TestBase {
     */
    @Test
    public void testContactPhones() {
-      app.goTo().HomePage();
       ContactData contact = app.contact().all().iterator().next();
       ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
@@ -52,7 +52,6 @@ public class ContactDataTests extends TestBase {
 
    @Test
    public void testContactAddress() {
-      app.goTo().HomePage();
       ContactData contact = app.contact().all().iterator().next();
       ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 

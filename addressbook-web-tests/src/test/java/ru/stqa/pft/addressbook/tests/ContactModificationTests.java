@@ -14,17 +14,17 @@ public class ContactModificationTests extends TestBase {
 
    @BeforeMethod
    public void ensurePreconditions() {
-      app.goTo().HomePage();
       ensureGroupPresent();
       ensureContactPresent();
+      app.goTo().HomePage();
    }
 
    @Test
    public void testContactModification() {
       Contacts before = app.db().contacts();
-      ContactData modifiedContact = before.iterator().next();
-      ContactData contact = new ContactData()
-              .withId(modifiedContact.getId())
+      ContactData selectedContact = before.iterator().next();
+      ContactData modifiedContact = new ContactData()
+              .withId(selectedContact.getId())
               .withFirstName("John")
               .withLastName("Doe")
               .withAddress("17. Sichovy str.\r\n218 apt")
@@ -32,11 +32,11 @@ public class ContactModificationTests extends TestBase {
               .withHomePhone("+0472313945").withMobilePhone("+380945643856").withWorkPhone("+380955653950")
               .inGroup(null)
               .withPhoto(new File("src/test/resources/duck.png"));
-      app.contact().modify(contact);
+      app.contact().modify(modifiedContact);
       Contacts after = app.db().contacts();
 
       assertThat(after.size(), equalTo(before.size()));
-      assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
+      assertThat(after, equalTo(before.without(selectedContact).with(modifiedContact)));
    }
 
 }

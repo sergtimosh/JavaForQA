@@ -7,8 +7,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
-import ru.stqa.pft.addressbook.model.GroupData;
-import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -41,21 +39,20 @@ public class ContactCreationTests extends TestBase {
 
    @BeforeMethod
    public void ensurePreconditions() {
-      app.goTo().HomePage();
       ensureGroupPresent();
+      app.goTo().HomePage();
 
    }
 
    @Test(dataProvider = "validContactsFromJson")
    public void testContactCreation(ContactData contact) {
-      app.goTo().HomePage();
       Contacts before = app.db().contacts();
       app.contact().create(contact.inGroup(app.db().groups().iterator().next()), true);
       Contacts after = app.db().contacts();
 
       assertThat(after.size(), equalTo(before.size() + 1));
       assertThat(after, equalTo(
-              before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
+              before.with(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
    }
 
 }
