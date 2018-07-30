@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
@@ -77,5 +78,20 @@ public class TestBase {
          app.group().create(newGroup);
       }
    }
+
+   public void ensureContactWithNotAllGroups() {
+      Groups groups = app.db().groups();
+      Contacts contacts = app.db().contacts();
+      /*Ensure, that there is some free group(contact not included in all groups)
+       * and if there is no - create new group*/
+      for (ContactData contact : contacts) {
+         if (contact.getGroups().size() != groups.size()) {
+            break;
+         }
+      }
+      app.goTo().groupPage();
+      app.group().create(new GroupData().withName("test new"));
+   }
+
 
 }
