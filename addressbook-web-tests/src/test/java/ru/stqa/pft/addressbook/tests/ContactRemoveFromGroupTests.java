@@ -5,60 +5,44 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
-import ru.stqa.pft.addressbook.model.Groups;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ContactAddToGroupsTests extends TestBase {
+public class ContactRemoveFromGroupTests extends TestBase {
 
    @BeforeMethod
    public void ensurePreconditions() {
       ensureGroupPresent();
       ensureContactPresent();
-      ensureContactWithNotAllGroups();
+      ensureContactInGroup();
       app.goTo().HomePage();
    }
 
    @Test
-   public void testContactAddToGroup() {
+   public void testContactRemoveFromGroup() {
       Contacts before = app.db().contacts();
-      ContactData contactFound = findContactNotInAllGroups();
+      ContactData contactFound = findContactWithGroup();
       Contacts beforeWithoutFound = before.without(contactFound);
-      GroupData groupFound = findGroupWithout(contactFound);
-      app.contact().addToGroup(contactFound, groupFound);
-      ContactData modifiedContact = contactFound.inGroup(groupFound);
+      GroupData groupToRemoveFrom = contactFound.getGroups().iterator().next();
+      app.contact().removeFromGroup(contactFound, groupToRemoveFrom);
+      ContactData modifiedContact = contactFound.fromGroup(groupToRemoveFrom);
       Contacts after = app.db().contacts();
 
       assertThat(after.size(), equalTo(before.size()));
       assertThat(after, equalTo(beforeWithoutFound.with(modifiedContact)));
-
    }
 
-
-   private ContactData findContactNotInAllGroups() {
-      Groups groups = app.db().groups();
+   public ContactData findContactWithGroup() {
       Contacts contacts = app.db().contacts();
       ContactData contactFound = null;
       for (ContactData contact : contacts) {
-         if (contact.getGroups().size() != groups.size()) {
+         if (contact.getGroups().size() > 0) {
             contactFound = contact;
             break;
          }
       }
       return contactFound;
-   }
-
-   private GroupData findGroupWithout(ContactData contact) {
-      Groups groups = app.db().groups();
-      GroupData selectedGroup = null;
-      for (GroupData group : groups) {
-         if (!group.getContacts().contains(contact)) {
-            selectedGroup = group;
-            break;
-         }
-      }
-      return selectedGroup;
    }
 
 }

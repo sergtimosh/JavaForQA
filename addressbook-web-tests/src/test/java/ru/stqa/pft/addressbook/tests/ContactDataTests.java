@@ -6,6 +6,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -32,7 +33,8 @@ public class ContactDataTests extends TestBase {
                  .withAddress("17. Sichovy str.\n116 apt")
                  .withEmail("serdtimosh@gmail.com").withEmail2("serdtimosh+1@gmail.com").withEmail3("serdtimosh+2@gmail.com")
                  .withHomePhone("+0472313950").withMobilePhone("+380945643839").withWorkPhone("+380975643850")
-                 .inGroup(groups.iterator().next()), true);
+                 .inGroup(groups.iterator().next())
+                 .withPhoto(new File("src/test/resources/duck.png")), true);
       }
       app.goTo().HomePage();
    }

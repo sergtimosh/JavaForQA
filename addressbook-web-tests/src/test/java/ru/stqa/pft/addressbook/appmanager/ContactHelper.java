@@ -74,11 +74,19 @@ public class ContactHelper extends HelperBase {
    }
 
    public void submitGroupAddition() {
-      click(By.cssSelector("input[type='submit']"));
+      click(By.cssSelector("input[name='add']"));
+   }
+
+   public void submitGroupRemoving() {
+      click(By.cssSelector("input[name='remove']"));
    }
 
    public void selectGroupFromMenu(GroupData group) {
       new Select(wd.findElement(By.name("to_group"))).selectByVisibleText((group.getName()));
+   }
+
+   public void selectGroupFromFilter(GroupData group) {
+      new Select(wd.findElement(By.name("group"))).selectByVisibleText((group.getName()));
    }
 
    public void create(ContactData contact, boolean creation) {
@@ -152,5 +160,12 @@ public class ContactHelper extends HelperBase {
       selectContactById(contact.getId());
       selectGroupFromMenu(group);
       submitGroupAddition();
+   }
+
+   public void removeFromGroup(ContactData contact, GroupData group) {
+      selectGroupFromFilter(group);
+      selectContactById(contact.getId());
+      submitGroupRemoving();
+
    }
 }

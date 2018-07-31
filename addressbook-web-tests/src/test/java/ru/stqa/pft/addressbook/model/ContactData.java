@@ -233,4 +233,9 @@ public class ContactData {
       groups.add(group);
       return this;
    }
+
+   public ContactData fromGroup(GroupData group) {
+      groups.remove(group);
+      return this;
+   }
 }

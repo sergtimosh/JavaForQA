@@ -16,6 +16,7 @@ import ru.stqa.pft.addressbook.model.Groups;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -23,9 +24,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TestBase {
 
+
    protected static final ApplicationManager app
            = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
    Logger logger = LoggerFactory.getLogger(TestBase.class);
+   Random rand = new Random();
+   int n = rand.nextInt(50) + 1;
 
    @BeforeSuite
    public void setUp() throws Exception {
@@ -79,18 +83,39 @@ public class TestBase {
       }
    }
 
+   /*Ensure, that there is some contact not included in all groups
+    * and if there is no - create new group*/
    public void ensureContactWithNotAllGroups() {
       Groups groups = app.db().groups();
       Contacts contacts = app.db().contacts();
-      /*Ensure, that there is some free group(contact not included in all groups)
-       * and if there is no - create new group*/
+      boolean freeGroupFound = false;
       for (ContactData contact : contacts) {
          if (contact.getGroups().size() != groups.size()) {
+            freeGroupFound = true;
             break;
          }
       }
-      app.goTo().groupPage();
-      app.group().create(new GroupData().withName("test new"));
+      if (!freeGroupFound) {
+         app.goTo().groupPage();
+         app.group().create(new GroupData().withName("test " + n));
+      }
+   }
+
+   /*Ensure, that there is some Contact added to some group*/
+   public void ensureContactInGroup() {
+      Groups groups = app.db().groups();
+      Contacts contacts = app.db().contacts();
+      boolean occupiedGroupFound = false;
+      for (ContactData contact : contacts) {
+         if (contact.getGroups().size() > 0) {
+            occupiedGroupFound = true;
+            break;
+         }
+      }
+      if (!occupiedGroupFound) {
+         app.goTo().HomePage();
+         app.contact().addToGroup(contacts.iterator().next(), groups.iterator().next());
+      }
    }
 
 
