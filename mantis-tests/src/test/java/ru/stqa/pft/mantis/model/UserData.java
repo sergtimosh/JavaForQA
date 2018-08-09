@@ -30,7 +30,8 @@ public class UserData {
       this.passwordMantis = passwordMantis;
    }
 
-   public UserData(){}
+   public UserData() {
+   }
 
    public int getId() {
       return id;
