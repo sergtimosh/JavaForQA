@@ -1,12 +1,18 @@
 package ru.stqa.pft.mantis.tests;
 
 import biz.futureware.mantis.rpc.soap.client.MantisConnectPortType;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+import org.apache.http.client.fluent.Request;
 import org.openqa.selenium.remote.BrowserType;
 import org.testng.SkipException;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import ru.lanwen.verbalregex.VerbalExpression;
 import ru.stqa.pft.mantis.appmanager.ApplicationManager;
+import ru.stqa.pft.mantis.model.Issue;
 import ru.stqa.pft.mantis.model.MailMessage;
 import ru.stqa.pft.mantis.model.UserData;
 
@@ -18,6 +24,7 @@ import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.List;
+import java.util.Set;
 
 import static org.testng.Assert.assertTrue;
 
@@ -63,7 +70,6 @@ public class TestBase {
    }
 
 
-
    public String findConfirmationLink(List<MailMessage> mailMessages, UserData userData) {
       MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(userData.getEmail())).findFirst().get();
       VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
@@ -81,8 +87,28 @@ public class TestBase {
       return true;
    }
 
+   public boolean isIssueOpenRest(int issueId) throws IOException {
+      String json = app.rest().getExecutor().execute(Request.Get("http://bugify.stqa.ru/api/issues.json?limit=1000"))
+              .returnContent().asString();
+      JsonElement parsed = new JsonParser().parse(json);
+      JsonElement issuesJson = parsed.getAsJsonObject().get("issues");
+      Set<Issue> issues = new Gson().fromJson(issuesJson, new TypeToken<Set<Issue>>() {}.getType());
+      for (Issue issue : issues) {
+         if (issue.getId() == issueId && issue.getState_name().equals("Closed")) {
+            return false;
+         }
+      }
+      return true;
+   }
+
    public void skipIfNotFixed(int issueId) throws RemoteException, ServiceException, MalformedURLException {
-      if (isIssueOpen(issueId) == true) {
+      if (isIssueOpen(issueId)) {
+         throw new SkipException("Ignored because of issue " + issueId);
+      }
+   }
+
+   public void skipIfNotFixedRest(int issueId) throws IOException {
+      if (isIssueOpenRest(issueId)) {
          throw new SkipException("Ignored because of issue " + issueId);
       }
    }
