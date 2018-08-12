@@ -16,12 +16,13 @@ public class PasswordChangeTests extends TestBase {
 
    @BeforeMethod
    public void ensurePreconditions() throws IOException, MessagingException {
-      ensureUserPresent();
+      ensureMantisUserExist();
    }
 
    @Test
    public void testPasswordChange() throws IOException, MessagingException {
       UserData user = app.db().getUserData().iterator().next(); //some user from db
+      ensureMailUserExist(user);
       /*Create new UserData object from thouse selected from db*/
       UserData userWithNewPassword = new UserData()
               .withUsername(user.getUsername())

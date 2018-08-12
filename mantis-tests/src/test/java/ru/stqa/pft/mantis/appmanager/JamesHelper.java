@@ -46,7 +46,7 @@ public class JamesHelper {
 
    public boolean doesUserExist(String name) {
       initTelnetSession();
-      write("verify" + name);
+      write("verify " + name);
       String result = readUntil("exist");
       closeTelnetSession();
       return result.trim().equals("User " + name + " exist");
@@ -118,7 +118,7 @@ public class JamesHelper {
       return null;
    }
 
-   private void write(String value) {
+   public void write(String value) {
       try {
          out.println(value);
          out.flush();

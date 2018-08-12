@@ -10,10 +10,10 @@ public class SessionHelper extends HelperBase {
    }
 
    public void login(UserData userData) {
+      wd.get(app.getProperty("web.baseUrl") + "/login_page.php");
       type(By.name("username"), userData.getUsername());
       click(By.cssSelector("input[type='submit']"));
       type(By.name("password"), userData.getPasswordMantis());
       click(By.cssSelector("input[type='submit']"));
-
    }
 }

@@ -40,13 +40,14 @@ public class TestBase {
    }
 
 
-   public void ensureUserPresent() throws MessagingException, IOException {
+   public void ensureMantisUserExist() throws MessagingException, IOException {
       Long now = System.currentTimeMillis();
       UserData newUser = new UserData()
               .withUsername(String.format("user%s", now))
               .withEmail(String.format("user%s@localhost", now))
               .withPasswordMail("password").withPasswordMantis("password1");
       if (app.db().getUserData().size() == 0) {
+         ensureMailUserExist(newUser);
          app.registration().start(newUser);
          List<MailMessage> mailMessages = app.james().waitForMail(newUser, 60000);
          String confirmationLink = findConfirmationLink(mailMessages, newUser);
@@ -54,6 +55,14 @@ public class TestBase {
          assertTrue(app.newSession().login(newUser));
       }
    }
+
+   public void ensureMailUserExist(UserData user) {
+      if (app.james().doesUserExist(user.getUsername()) == false) {
+         app.james().createUser(user);
+      }
+   }
+
+
 
    public String findConfirmationLink(List<MailMessage> mailMessages, UserData userData) {
       MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(userData.getEmail())).findFirst().get();
