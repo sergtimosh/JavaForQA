@@ -1,12 +1,18 @@
 package ru.stqa.pft.mantis.tests;
 
 import biz.futureware.mantis.rpc.soap.client.MantisConnectPortType;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+import org.apache.http.client.fluent.Request;
 import org.openqa.selenium.remote.BrowserType;
 import org.testng.SkipException;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import ru.lanwen.verbalregex.VerbalExpression;
 import ru.stqa.pft.mantis.appmanager.ApplicationManager;
+import ru.stqa.pft.mantis.model.Issue;
 import ru.stqa.pft.mantis.model.MailMessage;
 import ru.stqa.pft.mantis.model.UserData;
 
@@ -18,6 +24,7 @@ import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.List;
+import java.util.Set;
 
 import static org.testng.Assert.assertTrue;
 
