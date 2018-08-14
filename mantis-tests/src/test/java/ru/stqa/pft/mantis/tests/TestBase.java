@@ -87,28 +87,8 @@ public class TestBase {
       return true;
    }
 
-   public boolean isIssueOpenRest(int issueId) throws IOException {
-      String json = app.rest().getExecutor().execute(Request.Get("http://bugify.stqa.ru/api/issues.json?limit=1000"))
-              .returnContent().asString();
-      JsonElement parsed = new JsonParser().parse(json);
-      JsonElement issuesJson = parsed.getAsJsonObject().get("issues");
-      Set<Issue> issues = new Gson().fromJson(issuesJson, new TypeToken<Set<Issue>>() {}.getType());
-      for (Issue issue : issues) {
-         if (issue.getId() == issueId && issue.getState_name().equals("Closed")) {
-            return false;
-         }
-      }
-      return true;
-   }
-
    public void skipIfNotFixed(int issueId) throws RemoteException, ServiceException, MalformedURLException {
       if (isIssueOpen(issueId)) {
-         throw new SkipException("Ignored because of issue " + issueId);
-      }
-   }
-
-   public void skipIfNotFixedRest(int issueId) throws IOException {
-      if (isIssueOpenRest(issueId)) {
          throw new SkipException("Ignored because of issue " + issueId);
       }
    }
